@@ -6,12 +6,26 @@ import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
+// State functions
+import { useSelector, useDispatch } from 'react-redux'
+import { changeInputValues, resetFormValues } from './leagueInfoModalSlice'
+import { selectInputValues } from './leagueInfoModalSlice'
 
-const FloatingLabelModal = () => {
+const LeagueInfoModal = () => {
   const [show, setShow] = useState(false)
 
   const openModal = () => setShow(true)
   const closeModal = () => setShow(false)
+
+  // Form input state
+  const inputValues = useSelector(selectInputValues)
+  console.log(inputValues)
+  const dispatch = useDispatch()
+
+  const handleInputValueChange = (event) => {
+    const { name, value } = event.target
+    dispatch(changeInputValues({ name, value }))
+  }
 
   return (
     <>
@@ -33,6 +47,8 @@ const FloatingLabelModal = () => {
                   aria-label='League name'
                   name='leagueName'
                   placeholder='Enter a league name'
+                  onChange={handleInputValueChange}
+                  value={inputValues.leagueName}
                   required></Form.Control>
               </FloatingLabel>
             </InputGroup>
@@ -44,6 +60,8 @@ const FloatingLabelModal = () => {
                   aria-label='Team Name'
                   name='teamName'
                   placeholder='Enter a team name'
+                  onChange={handleInputValueChange}
+                  value={inputValues.teamName}
                   required></Form.Control>
               </FloatingLabel>
             </InputGroup>
@@ -56,7 +74,9 @@ const FloatingLabelModal = () => {
                       type='date'
                       aria-label='Date the draft was held'
                       name='draftDate'
-                      placeholder='Enter the date the draft was held'></Form.Control>
+                      placeholder='Enter the date the draft was held'
+                      onChange={handleInputValueChange}
+                      value={inputValues.draftDate}></Form.Control>
                   </FloatingLabel>
                 </InputGroup>
               </Col>
@@ -67,7 +87,8 @@ const FloatingLabelModal = () => {
                       aria-label='Platform of fantasy league'
                       name='platform'
                       placeholder='Enter the platform the league create on'
-                      defaultValue=''
+                      onChange={handleInputValueChange}
+                      defaultValue={inputValues.platform}
                       required>
                       <option disabled value=''>
                         Platforms...
@@ -91,20 +112,28 @@ const FloatingLabelModal = () => {
                       min='1'
                       step='1'
                       aria-label='Team Count'
-                      name='Team Count'
+                      name='teamCount'
                       placeholder='Enter the number of teams'
+                      onChange={handleInputValueChange}
+                      value={inputValues.teamCount}
                       required></Form.Control>
                   </FloatingLabel>
                 </InputGroup>
               </Col>
               <Col>
                 <InputGroup>
-                  <FloatingLabel controlId='draftOrder' label='Draft Order'>
+                  <FloatingLabel
+                    controlId='pickPosition'
+                    label='Pick Position'>
                     <Form.Control
-                      type='text'
-                      aria-label='Draft Order'
-                      name='draftOrder'
-                      placeholder='Enter the draft order'></Form.Control>
+                      type='number'
+                      min='1'
+                      step='1'
+                      aria-label='Position in Draft'
+                      name='pickPosition'
+                      placeholder='Enter your position in the draft pick order'
+                      onChange={handleInputValueChange}
+                      value={inputValues.placeInDraft}></Form.Control>
                   </FloatingLabel>
                 </InputGroup>
               </Col>
@@ -122,6 +151,8 @@ const FloatingLabelModal = () => {
                       aria-label='Buy-In cost'
                       name='buyIn'
                       placeholder='Enter the buy-in cost'
+                      onChange={handleInputValueChange}
+                      value={inputValues.buyIn}
                       required></Form.Control>
                   </FloatingLabel>
                 </InputGroup>
@@ -138,7 +169,9 @@ const FloatingLabelModal = () => {
                       step='1'
                       aria-label='Initial Rank'
                       name='initialRank'
-                      placeholder='Enter the starting rank'></Form.Control>
+                      placeholder='Enter the starting rank'
+                      onChange={handleInputValueChange}
+                      value={inputValues.initialRank}></Form.Control>
                   </FloatingLabel>
                 </InputGroup>
               </Col>
@@ -151,7 +184,9 @@ const FloatingLabelModal = () => {
                       step='1'
                       aria-label='Current Rank'
                       name='currentRank'
-                      placeholder='Enter the current rank'></Form.Control>
+                      placeholder='Enter the current rank'
+                      onChange={handleInputValueChange}
+                      value={inputValues.currentRank}></Form.Control>
                   </FloatingLabel>
                 </InputGroup>
               </Col>
@@ -167,7 +202,9 @@ const FloatingLabelModal = () => {
                       step='1'
                       aria-label='Number of teams in playoffs'
                       name='playoffTeams'
-                      placeholder='Enter the number of teams in playoffs'></Form.Control>
+                      placeholder='Enter the number of teams in playoffs'
+                      onChange={handleInputValueChange}
+                      value={inputValues.playoffTeams}></Form.Control>
                   </FloatingLabel>
                 </InputGroup>
               </Col>
@@ -182,13 +219,15 @@ const FloatingLabelModal = () => {
                       step='any'
                       aria-label='First place win payout'
                       name='payout1'
-                      placeholder='First place win payout'></Form.Control>
+                      placeholder='First place win payout'
+                      onChange={handleInputValueChange}
+                      value={inputValues.payout1}></Form.Control>
                   </FloatingLabel>
                 </InputGroup>
               </Col>
             </Row>
 
-            <Row className='gx-0 pb-3'>
+            <Row className='gx-1 pb-3'>
               <Col>
                 <InputGroup>
                   <InputGroup.Text>$</InputGroup.Text>
@@ -199,7 +238,9 @@ const FloatingLabelModal = () => {
                       step='any'
                       aria-label='Second place win payout'
                       name='payout2'
-                      placeholder='Second place win payout'></Form.Control>
+                      placeholder='Second place win payout'
+                      onChange={handleInputValueChange}
+                      value={inputValues.payout2}></Form.Control>
                   </FloatingLabel>
                 </InputGroup>
               </Col>
@@ -213,7 +254,9 @@ const FloatingLabelModal = () => {
                       step='any'
                       aria-label='Third place win payout'
                       name='payout3'
-                      placeholder='Third place win payout'></Form.Control>
+                      placeholder='Third place win payout'
+                      onChange={handleInputValueChange}
+                      value={inputValues.payout3}></Form.Control>
                   </FloatingLabel>
                 </InputGroup>
               </Col>
@@ -231,4 +274,4 @@ const FloatingLabelModal = () => {
   )
 }
 
-export default FloatingLabelModal
+export default LeagueInfoModal

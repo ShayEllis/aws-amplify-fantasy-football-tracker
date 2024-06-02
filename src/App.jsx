@@ -1,11 +1,10 @@
 import './App.sass'
-import FloatingLabelModal from './floatingLabelModal/floatingLabelModal'
+import LeagueInfoModal from './leagueInfoModal/leagueInfoModal'
 
 function App() {
-
   return (
     <div>
-      <FloatingLabelModal />
+      <LeagueInfoModal />
     </div>
   )
 }
