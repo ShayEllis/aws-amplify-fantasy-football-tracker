@@ -1,11 +1,11 @@
 import './App.sass'
-import TestModal from './testModal/testModal'
+import FloatingLabelModal from './floatingLabelModal/floatingLabelModal'
 
 function App() {
 
   return (
     <div>
-      <TestModal />
+      <FloatingLabelModal />
     </div>
   )
 }
