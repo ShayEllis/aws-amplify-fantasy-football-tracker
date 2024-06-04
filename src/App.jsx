@@ -1,10 +1,11 @@
 import './App.sass'
-import LeagueInfoModal from './leagueInfoModal/leagueInfoModal'
+// import LeagueInfoModal from './components/leagueInfoModal/leagueInfoModal'
+import NavigationBar from './components/navigationBar/navigationBar'
 
 function App() {
   return (
     <div>
-      <LeagueInfoModal />
+      <NavigationBar />
     </div>
   )
 }

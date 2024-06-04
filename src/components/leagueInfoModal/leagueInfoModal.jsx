@@ -122,9 +122,7 @@ const LeagueInfoModal = () => {
               </Col>
               <Col>
                 <InputGroup>
-                  <FloatingLabel
-                    controlId='pickPosition'
-                    label='Pick Position'>
+                  <FloatingLabel controlId='pickPosition' label='Pick Position'>
                     <Form.Control
                       type='number'
                       min='1'
