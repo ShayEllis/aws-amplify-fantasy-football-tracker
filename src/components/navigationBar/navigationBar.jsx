@@ -1,6 +1,8 @@
 import './navigationBar.scss'
 import { Link, NavLink } from 'react-router-dom'
 import Navbar from 'react-bootstrap/Navbar'
+import Offcanvas from 'react-bootstrap/Offcanvas'
+import Nav from 'react-bootstrap/Nav'
 import Container from 'react-bootstrap/Container'
 import footballIcon from '../../assets/football-icon.svg'
 
@@ -20,12 +22,23 @@ const NavigationBar = () => {
             </h2>
           </Navbar.Brand>
         </Link>
-
-        <Navbar.Toggle aria-controls='bg-body-tertiary' />
+        <Navbar.Toggle aria-controls='offcanvas-nav-menu' />
         <Navbar.Offcanvas
-          id=''
-          aria-labelledby=''
-          placement='end'></Navbar.Offcanvas>
+          id='offcanvas-nav-menu'
+          aria-labelledby='offcanvas-nav-menu'
+          placement='end'>
+            <Offcanvas.Header closeButton>
+              <Offcanvas.Title id='offcanvas-nav-title'>
+                Menu
+              </Offcanvas.Title>
+            </Offcanvas.Header>
+            <Offcanvas.Body>
+              <Nav>
+                <NavLink to='dashboard' className='nav-link'>Dashboard</NavLink>
+                <NavLink to='teamBuilder' className='nav-link'>Team Details</NavLink>
+              </Nav>
+            </Offcanvas.Body>
+          </Navbar.Offcanvas>
       </Container>
     </Navbar>
   )

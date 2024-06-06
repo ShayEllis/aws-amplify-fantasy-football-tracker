@@ -29,7 +29,7 @@ const LeagueInfoModal = () => {
 
   return (
     <>
-      <Button variant='primary' onClick={openModal}>
+      <Button variant='secondary' onClick={openModal}>
         Open Modal
       </Button>
 

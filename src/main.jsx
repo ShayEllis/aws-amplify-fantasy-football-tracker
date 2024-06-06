@@ -1,8 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+// Use normalize to help render elements consistantly
 import 'normalize.css'
+import './index.scss'
+
+// Configure Bootstrap 5 styles
 import 'bootstrap/dist/css/bootstrap.min.css'
-import './index.sass'
+
+// Configure Bootstrap Icons
+import 'bootstrap-icons/font/bootstrap-icons.css'
 
 // Configure React-Redux
 import { Provider } from 'react-redux'

@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom'
 import App from '../App'
+import LeagueInfoCard from '../components/leagueInfoCard/leagueInfoCard'
 
 const router = createBrowserRouter([
   {
@@ -7,7 +8,11 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: 'Dashboard',
+        path: 'dashboard',
+        element: <LeagueInfoCard />,
+      },
+      {
+        path: 'teamBuilder',
         element: '',
       },
     ],
