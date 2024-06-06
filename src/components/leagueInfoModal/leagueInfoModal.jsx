@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import './leagueInfoModal.scss'
+import PropTypes from 'prop-types'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 import InputGroup from 'react-bootstrap/InputGroup'
@@ -6,12 +8,13 @@ import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
+import Accordion from 'react-bootstrap/Accordion'
 // State functions
 import { useSelector, useDispatch } from 'react-redux'
 import { changeInputValues, resetFormValues } from './leagueInfoModalSlice'
 import { selectInputValues } from './leagueInfoModalSlice'
 
-const LeagueInfoModal = () => {
+const LeagueInfoModal = ({ type = 'add' }) => {
   const [show, setShow] = useState(false)
 
   const openModal = () => setShow(true)
@@ -29,13 +32,29 @@ const LeagueInfoModal = () => {
 
   return (
     <>
-      <Button variant='secondary' onClick={openModal}>
-        Open Modal
-      </Button>
+      {type === 'add' ? (
+        <Button
+          size='sm'
+          variant='outline-secondary'
+          className='p-0 ps-1 pe-1'
+          onClick={openModal}>
+          <i className='bi bi-plus-lg'></i>
+        </Button>
+      ) : (
+        <Button
+          size='sm'
+          variant='outline-secondary'
+          className='p-0 ps-1 pe-1'
+          onClick={openModal}>
+          <i className='bi bi-pencil-square'></i>
+        </Button>
+      )}
 
       <Modal show={show} onHide={closeModal} centered>
         <Modal.Header closeButton>
-          <Modal.Title>Add/Edit League</Modal.Title>
+          <Modal.Title>
+            {type === 'add' ? 'Add League' : 'Edit League'}
+          </Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
@@ -225,7 +244,7 @@ const LeagueInfoModal = () => {
               </Col>
             </Row>
 
-            <Row className='gx-1 pb-3'>
+            <Row className='gx-1 pb-1'>
               <Col>
                 <InputGroup>
                   <InputGroup.Text>$</InputGroup.Text>
@@ -259,8 +278,20 @@ const LeagueInfoModal = () => {
                 </InputGroup>
               </Col>
             </Row>
+            {type === 'edit' && (
+              <Accordion className='pb-1'>
+                <Accordion.Item id='modal-accordian-item' eventKey='danger'>
+                  <Accordion.Button
+                    className='btn-outline-danger'
+                    id='modal-accordian-btn'>
+                    Options
+                  </Accordion.Button>
+                  <Accordion.Body>Delete Button</Accordion.Body>
+                </Accordion.Item>
+              </Accordion>
+            )}
 
-            <Row className='gx-0'>
+            <Row className='gx-0 pt-2'>
               <Button variant='secondary' type='submit'>
                 Save
               </Button>
@@ -270,6 +301,10 @@ const LeagueInfoModal = () => {
       </Modal>
     </>
   )
+}
+
+LeagueInfoModal.propTypes = {
+  type: PropTypes.string,
 }
 
 export default LeagueInfoModal

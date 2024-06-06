@@ -1,5 +1,5 @@
 import './leagueInfoCard.scss'
-import DeleteInfoCardModal from './deleteInfoCardModal/deleteInfoCardModal'
+import LeagueInfoModal from '../leagueInfoModal/leagueInfoModal'
 import Card from 'react-bootstrap/Card'
 import Tabs from 'react-bootstrap/Tabs'
 import Tab from 'react-bootstrap/Tab'
@@ -16,7 +16,7 @@ const LeagueInfoCard = () => {
             <Card.Title className='fs-6 fw-bold'>My League Name</Card.Title>
           </Col>
           <Col xs='auto'>
-            <DeleteInfoCardModal />
+            <LeagueInfoModal type='edit' />
           </Col>
         </Row>
         <Card.Text>Team Name</Card.Text>
@@ -38,13 +38,18 @@ const LeagueInfoCard = () => {
                   <td>Platform:</td>
                   <td>Yahoo</td>
                 </tr>
+
                 <tr>
-                  <td>Current Rank:</td>
-                  <td>1</td>
+                  <td>Buy-In:</td>
+                  <td>$15.00</td>
                 </tr>
                 <tr>
-                  <td>Payout 1</td>
-                  <td>$126.00</td>
+                  <td>Pick Position:</td>
+                  <td>2</td>
+                </tr>
+                <tr>
+                  <td>Playoff Teams:</td>
+                  <td>6</td>
                 </tr>
               </tbody>
             </Table>
@@ -53,20 +58,16 @@ const LeagueInfoCard = () => {
             <Table striped hover size='sm' className='mt-1 mb-0'>
               <tbody>
                 <tr>
-                  <td>Pick Position:</td>
-                  <td>2</td>
-                </tr>
-                <tr>
-                  <td>Buy-In:</td>
-                  <td>$15.00</td>
-                </tr>
-                <tr>
                   <td>Initial Rank:</td>
                   <td>8</td>
                 </tr>
                 <tr>
-                  <td>Playoff Teams:</td>
-                  <td>6</td>
+                  <td>Current Rank:</td>
+                  <td>1</td>
+                </tr>
+                <tr>
+                  <td>Payout 1</td>
+                  <td>$126.00</td>
                 </tr>
                 <tr>
                   <td>Payout 2</td>

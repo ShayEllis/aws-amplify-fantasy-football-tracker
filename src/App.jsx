@@ -10,8 +10,8 @@ function App() {
     <>
       <NavigationBar />
       <Container fluid>
-        <LeagueInfoModal />
         <Outlet />
+        <LeagueInfoModal />
       </Container>
     </>
   )
