@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './leagueInfoModal.scss'
+import DeleteInfoCardButton from './DeleteInfoCardButton/DeleteInfoCardButton'
 import PropTypes from 'prop-types'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
@@ -281,12 +282,16 @@ const LeagueInfoModal = ({ type = 'add' }) => {
             {type === 'edit' && (
               <Accordion className='pb-1'>
                 <Accordion.Item id='modal-accordian-item' eventKey='danger'>
-                  <Accordion.Button
-                    className='btn-outline-danger'
-                    id='modal-accordian-btn'>
+                  <Accordion.Button id='modal-accordian-btn'>
                     Options
                   </Accordion.Button>
-                  <Accordion.Body>Delete Button</Accordion.Body>
+                  <Accordion.Body className='p-2'>
+                    <Row className='justify-content-center'>
+                      <Col xs='auto'>
+                        <DeleteInfoCardButton />
+                      </Col>
+                    </Row>
+                  </Accordion.Body>
                 </Accordion.Item>
               </Accordion>
             )}

@@ -1,20 +1,23 @@
- #modal-accordian-item {
+@use '../../index.scss' as colors;
+
+#modal-accordian-item {
   border-color: red;
- }
- #modal-accordian-btn {
+}
+#modal-accordian-btn {
   border-top-left-radius: var(--bs-accordion-inner-border-radius);
   border-top-right-radius: var(--bs-accordion-inner-border-radius);
   background-color: transparent;
-  color: red;
+  color: colors.$danger-text-color;
+  padding: 8px;
 }
 #modal-accordian-btn.collapsed {
   border-bottom-right-radius: var(--bs-accordion-inner-border-radius);
   border-bottom-left-radius: var(--bs-accordion-inner-border-radius);
-
+  color: colors.$danger-color;
 }
 #modal-accordian-btn:focus {
   box-shadow: none;
 }
 #modal-accordian-btn:not(.collapsed) {
-  background: rgb(255, 155, 155);
+  background: colors.$danger-color;
 }
