@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom'
 import App from '../App'
-import LeagueInfoCard from '../components/leagueInfoCard/leagueInfoCard'
+import Dashboard from '../components/dashboard/dashboard'
 
 const router = createBrowserRouter([
   {
@@ -9,7 +9,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: 'dashboard',
-        element: <LeagueInfoCard />,
+        element: <Dashboard />,
       },
       {
         path: 'teamBuilder',

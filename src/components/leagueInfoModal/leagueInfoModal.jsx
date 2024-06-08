@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './leagueInfoModal.scss'
-import DeleteInfoCardButton from './DeleteInfoCardButton/DeleteInfoCardButton'
+import DeleteInfoCardButton from './deleteInfoCardButton/deleteInfoCardButton'
 import PropTypes from 'prop-types'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
@@ -16,10 +16,14 @@ import { changeInputValues, resetFormValues } from './leagueInfoModalSlice'
 import { selectInputValues } from './leagueInfoModalSlice'
 
 const LeagueInfoModal = ({ type = 'add' }) => {
-  const [show, setShow] = useState(false)
+  const [showModal, setShowModal] = useState(false)
 
-  const openModal = () => setShow(true)
-  const closeModal = () => setShow(false)
+  const toggleModal = () => setShowModal(!showModal)
+
+  const handleFormSubmit = (event) => {
+    event.preventDefault()
+    console.log(event)
+  }
 
   // Form input state
   const inputValues = useSelector(selectInputValues)
@@ -38,7 +42,7 @@ const LeagueInfoModal = ({ type = 'add' }) => {
           size='sm'
           variant='outline-secondary'
           className='p-0 ps-1 pe-1'
-          onClick={openModal}>
+          onClick={toggleModal}>
           <i className='bi bi-plus-lg'></i>
         </Button>
       ) : (
@@ -46,12 +50,12 @@ const LeagueInfoModal = ({ type = 'add' }) => {
           size='sm'
           variant='outline-secondary'
           className='p-0 ps-1 pe-1'
-          onClick={openModal}>
+          onClick={toggleModal}>
           <i className='bi bi-pencil-square'></i>
         </Button>
       )}
 
-      <Modal show={show} onHide={closeModal} centered>
+      <Modal show={showModal} onHide={toggleModal} centered>
         <Modal.Header closeButton>
           <Modal.Title>
             {type === 'add' ? 'Add League' : 'Edit League'}
@@ -59,7 +63,7 @@ const LeagueInfoModal = ({ type = 'add' }) => {
         </Modal.Header>
 
         <Modal.Body>
-          <Form onSubmit={closeModal}>
+          <Form onSubmit={handleFormSubmit}>
             <InputGroup className='pb-1'>
               <FloatingLabel controlId='leagueName' label='League Name'>
                 <Form.Control
