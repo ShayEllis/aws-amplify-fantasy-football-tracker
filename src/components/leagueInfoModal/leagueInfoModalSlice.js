@@ -1,3 +1,4 @@
+// Redux
 import { createSlice } from '@reduxjs/toolkit'
 
 // Values for initial state
@@ -35,6 +36,7 @@ export const leagueInfoModalSlice = createSlice({
 // State selector functions
 const selectInputValues = (state) => state.leagueInfoModal
 
+// Exports
 export { selectInputValues }
 export const { changeInputValues, resetFormValues } =
   leagueInfoModalSlice.actions

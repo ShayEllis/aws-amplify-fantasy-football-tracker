@@ -1,4 +1,8 @@
+// Styles
 import './leagueInfoCard.scss'
+// Prop Validation
+import PropTypes from 'prop-types'
+// Bootstrap
 import LeagueInfoModal from '../leagueInfoModal/leagueInfoModal'
 import Card from 'react-bootstrap/Card'
 import Tabs from 'react-bootstrap/Tabs'
@@ -6,50 +10,56 @@ import Tab from 'react-bootstrap/Tab'
 import Table from 'react-bootstrap/Table'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+// Utils
+import { formatDate } from '../../utils/utils'
 
-const LeagueInfoCard = () => {
+const LeagueInfoCard = ({ leagueData }) => {
+  const formatedDraftDate = formatDate(leagueData.draftDate)
+
   return (
-    <Card id='leagueInfoCard'>
+    <Card id='leagueInfoCard' className='flex-shrink-0'>
       <Card.Header className='p-2'>
         <Row>
           <Col>
-            <Card.Title className='fs-6 fw-bold'>My League Name</Card.Title>
+            <Card.Title className='fs-6 fw-bold'>
+              {leagueData.leagueName}
+            </Card.Title>
           </Col>
           <Col xs='auto'>
             <LeagueInfoModal type='edit' />
           </Col>
         </Row>
-        <Card.Text>Team Name</Card.Text>
+        <Card.Text>{leagueData.teamName}</Card.Text>
       </Card.Header>
 
       <Card.Body className='p-1'>
         <Tabs defaultActiveKey='summary' id='card-tabs' justify>
           <Tab eventKey='summary' title='Summary'>
             <Card.Text className='text-center mt-1 mb-1'>
-              {'{teamCount}'} - Team
+              {leagueData.teamCount} - Team
             </Card.Text>
             <Table striped hover size='sm' className='mb-0'>
               <tbody>
                 <tr>
                   <td>Draft Date:</td>
-                  <td>7/1/2024</td>
+                  <td>{formatedDraftDate}</td>
                 </tr>
                 <tr>
                   <td>Platform:</td>
-                  <td>Yahoo</td>
+                  <td>{leagueData.platform.toUpperCase()}</td>
                 </tr>
 
                 <tr>
                   <td>Buy-In:</td>
-                  <td>$15.00</td>
+                  <td>${parseInt(leagueData.buyIn).toFixed(2)}</td>
                 </tr>
                 <tr>
                   <td>Pick Position:</td>
-                  <td>2</td>
+                  <td>{leagueData.pickPosition}</td>
                 </tr>
                 <tr>
                   <td>Playoff Teams:</td>
-                  <td>6</td>
+                  <td>{leagueData.playoffTeams}</td>
                 </tr>
               </tbody>
             </Table>
@@ -59,23 +69,23 @@ const LeagueInfoCard = () => {
               <tbody>
                 <tr>
                   <td>Initial Rank:</td>
-                  <td>8</td>
+                  <td>{leagueData.initialRank}</td>
                 </tr>
                 <tr>
                   <td>Current Rank:</td>
-                  <td>1</td>
+                  <td>{leagueData.currentRank}</td>
                 </tr>
                 <tr>
                   <td>Payout 1</td>
-                  <td>$126.00</td>
+                  <td>${parseInt(leagueData.payout1).toFixed(2)}</td>
                 </tr>
                 <tr>
                   <td>Payout 2</td>
-                  <td>$20.00</td>
+                  <td>${parseInt(leagueData.payout2).toFixed(2)}</td>
                 </tr>
                 <tr>
                   <td>Payout 3</td>
-                  <td>$5.00</td>
+                  <td>${parseInt(leagueData.payout3).toFixed(2)}</td>
                 </tr>
               </tbody>
             </Table>
@@ -84,6 +94,10 @@ const LeagueInfoCard = () => {
       </Card.Body>
     </Card>
   )
+}
+
+LeagueInfoCard.propTypes = {
+  leagueData: PropTypes.object.isRequired,
 }
 
 export default LeagueInfoCard

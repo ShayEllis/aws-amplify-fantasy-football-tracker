@@ -1,4 +1,6 @@
-import './DeleteInfoCardButton.scss'
+// Styles
+import './deleteInfoCardButton.scss'
+// Bootstrap
 import Button from 'react-bootstrap/Button'
 
 const DeleteInfoCardButton = () => {

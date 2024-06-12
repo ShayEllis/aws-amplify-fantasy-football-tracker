@@ -1,5 +1,8 @@
+// React
 import { useState } from 'react'
+// Styles
 import './leagueInfoModal.scss'
+// Bootstrap
 import DeleteInfoCardButton from './deleteInfoCardButton/deleteInfoCardButton'
 import PropTypes from 'prop-types'
 import Button from 'react-bootstrap/Button'
@@ -27,7 +30,6 @@ const LeagueInfoModal = ({ type = 'add' }) => {
 
   // Form input state
   const inputValues = useSelector(selectInputValues)
-  console.log(inputValues)
   const dispatch = useDispatch()
 
   const handleInputValueChange = (event) => {
@@ -40,10 +42,10 @@ const LeagueInfoModal = ({ type = 'add' }) => {
       {type === 'add' ? (
         <Button
           size='sm'
-          variant='outline-secondary'
-          className='p-0 ps-1 pe-1'
-          onClick={toggleModal}>
-          <i className='bi bi-plus-lg'></i>
+          variant='secondary'
+          onClick={toggleModal}
+          id='add-league-button'>
+          <i className='bi bi-plus'></i>
         </Button>
       ) : (
         <Button

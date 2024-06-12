@@ -1,4 +1,6 @@
+// React Router
 import { createBrowserRouter } from 'react-router-dom'
+// Components
 import App from '../App'
 import Dashboard from '../components/dashboard/dashboard'
 

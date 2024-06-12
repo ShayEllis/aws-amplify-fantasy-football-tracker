@@ -1,4 +1,6 @@
+// React
 import React from 'react'
+// React Router
 import ReactDOM from 'react-dom/client'
 // Use normalize to help render elements consistantly
 import 'normalize.css'
