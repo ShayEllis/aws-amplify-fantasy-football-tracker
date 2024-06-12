@@ -2,8 +2,6 @@
 import { useState } from 'react'
 // Styles
 import './leagueInfoModal.scss'
-// Components
-import DeleteInfoCardButton from '../deleteInfoCardButton/deleteInfoCardButton'
 // Bootstrap
 import PropTypes from 'prop-types'
 import Button from 'react-bootstrap/Button'
@@ -28,6 +26,8 @@ const LeagueInfoModal = ({ type = 'add' }) => {
     event.preventDefault()
     console.log(event)
   }
+
+  const handleLeagueDelete = () => {}
 
   // Form input state
   const inputValues = useSelector(selectInputValues)
@@ -295,7 +295,14 @@ const LeagueInfoModal = ({ type = 'add' }) => {
                   <Accordion.Body className='p-2'>
                     <Row className='justify-content-center'>
                       <Col xs='auto'>
-                        <DeleteInfoCardButton />
+                        <Button
+                          size='sm'
+                          variant='outline-danger'
+                          className='p-1 ps-2 pe-2'
+                          onClick={handleLeagueDelete}>
+                          <i className='bi bi-trash3 pe-2'></i>
+                          Delete League
+                        </Button>
                       </Col>
                     </Row>
                   </Accordion.Body>
