@@ -10,6 +10,7 @@ import { selectAllLeagues } from '../../AppSlice'
 
 const Dashboard = () => {
   const leagues = useSelector(selectAllLeagues)
+  console.log(leagues)
 
   return (
     <>

@@ -20,11 +20,15 @@ import {
   resetFormValues,
 } from './leagueInfoModalSlice'
 import { selectInputValues } from './leagueInfoModalSlice'
+import { addLeague } from '../../AppSlice'
 import { selectLeague } from '../../AppSlice'
 
 const LeagueInfoModal = ({ type = 'add', leagueName = null }) => {
   const [showModal, setShowModal] = useState(false)
   const leagueToEdit = useSelector((state) => selectLeague(state, leagueName))
+  // Form input state
+  const inputValues = useSelector(selectInputValues)
+  const dispatch = useDispatch()
 
   const openModal = () => {
     console.log(`Open ${type} modal`)
@@ -36,6 +40,7 @@ const LeagueInfoModal = ({ type = 'add', leagueName = null }) => {
       dispatch(resetFormValues())
     }
   }
+
   const closeModal = () => {
     console.log(`Close ${type} modal`)
 
@@ -44,16 +49,15 @@ const LeagueInfoModal = ({ type = 'add', leagueName = null }) => {
 
   const handleFormSubmit = (event) => {
     event.preventDefault()
-    console.log(event)
+    if (type === 'add') {
+      dispatch(addLeague(inputValues))
+      closeModal()
+    }
   }
 
   const handleLeagueDelete = () => {
     console.log(`delete: ${leagueName}`)
   }
-
-  // Form input state
-  const inputValues = useSelector(selectInputValues)
-  const dispatch = useDispatch()
 
   const handleInputValueChange = (event) => {
     const { name, value } = event.target
@@ -142,10 +146,10 @@ const LeagueInfoModal = ({ type = 'add', leagueName = null }) => {
                       <option disabled value=''>
                         Platforms...
                       </option>
-                      <option value='espn'>ESPN</option>
-                      <option value='free'>Free</option>
-                      <option value='sleeper'>Sleeper</option>
-                      <option value='yahoo'>Yahoo</option>
+                      <option value='ESPN'>ESPN</option>
+                      <option value='Free'>Free</option>
+                      <option value='Sleeper'>Sleeper</option>
+                      <option value='Yahoo'>Yahoo</option>
                     </Form.Select>
                   </FloatingLabel>
                 </InputGroup>

@@ -17,22 +17,28 @@ const appSlice = createSlice({
   name: 'app',
   initialState,
   reducers: {
-    // removeLeague: (action, state) => {},
-    // addLeague: (action, state) => {},
+    // deleteLeague: (state, action) => {},
+    addLeague: (state, { payload }) => {
+      const newLeagues = [...state.leagues, payload]
+      return { ...state, leagues: newLeagues }
+    },
   },
 })
 
 // State selector functions
 const selectAllLeagues = (state) => state.app.leagues
 const selectLeague = (state, leagueName) => {
+  let selectedLeague = null
   for (let league of state.app.leagues) {
     if (league.leagueName === leagueName) {
-      return league
+      selectedLeague = { ...league }
+      break
     }
   }
+  return selectedLeague
 }
 
 // Exports
 export { selectAllLeagues, selectLeague }
-export const { reducer1 } = appSlice.actions
+export const { addLeague } = appSlice.actions
 export default appSlice.reducer

@@ -47,7 +47,7 @@ const LeagueInfoCard = ({ leagueData }) => {
                 </tr>
                 <tr>
                   <td>Platform:</td>
-                  <td>{leagueData.platform.toUpperCase()}</td>
+                  <td>{leagueData.platform}</td>
                 </tr>
                 <tr>
                   <td>Buy-In:</td>
@@ -82,15 +82,15 @@ const LeagueInfoCard = ({ leagueData }) => {
                 </tr>
                 <tr>
                   <td>Payout 1</td>
-                  <td>${parseInt(leagueData.payout1).toFixed(2)}</td>
+                  <td>{leagueData.payout1.length > 0 && `$${parseInt(leagueData.payout1).toFixed(2)}`}</td>
                 </tr>
                 <tr>
                   <td>Payout 2</td>
-                  <td>${parseInt(leagueData.payout2).toFixed(2)}</td>
+                  <td>{leagueData.payout2.length > 0 && `$${parseInt(leagueData.payout2).toFixed(2)}`}</td>
                 </tr>
                 <tr>
                   <td>Payout 3</td>
-                  <td>${parseInt(leagueData.payout3).toFixed(2)}</td>
+                  <td>{leagueData.payout3.length > 0 && `$${parseInt(leagueData.payout3).toFixed(2)}`}</td>
                 </tr>
               </tbody>
             </Table>
