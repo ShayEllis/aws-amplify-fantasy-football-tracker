@@ -23,6 +23,9 @@ export const leagueInfoModalSlice = createSlice({
   name: 'leagueInfoModal',
   initialState,
   reducers: {
+    loadLeagueData: (_, action) => {
+      return action.payload
+    },
     changeInputValues: (state, action) => {
       const { name, value } = action.payload
       return { ...state, [name]: value }
@@ -38,6 +41,6 @@ const selectInputValues = (state) => state.leagueInfoModal
 
 // Exports
 export { selectInputValues }
-export const { changeInputValues, resetFormValues } =
+export const { loadLeagueData, changeInputValues, resetFormValues } =
   leagueInfoModalSlice.actions
 export default leagueInfoModalSlice.reducer

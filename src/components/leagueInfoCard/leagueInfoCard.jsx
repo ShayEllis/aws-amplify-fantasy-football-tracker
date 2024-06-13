@@ -2,8 +2,9 @@
 import './leagueInfoCard.scss'
 // Prop Validation
 import PropTypes from 'prop-types'
-// Bootstrap
+// Components
 import LeagueInfoModal from '../leagueInfoModal/leagueInfoModal'
+// Bootstrap
 import Card from 'react-bootstrap/Card'
 import Tabs from 'react-bootstrap/Tabs'
 import Tab from 'react-bootstrap/Tab'
@@ -26,7 +27,7 @@ const LeagueInfoCard = ({ leagueData }) => {
             </Card.Title>
           </Col>
           <Col xs='auto'>
-            <LeagueInfoModal type='edit' />
+            <LeagueInfoModal type='edit' leagueName={leagueData.leagueName} />
           </Col>
         </Row>
         <Card.Text>{leagueData.teamName}</Card.Text>
@@ -48,7 +49,6 @@ const LeagueInfoCard = ({ leagueData }) => {
                   <td>Platform:</td>
                   <td>{leagueData.platform.toUpperCase()}</td>
                 </tr>
-
                 <tr>
                   <td>Buy-In:</td>
                   <td>${parseInt(leagueData.buyIn).toFixed(2)}</td>
@@ -65,7 +65,12 @@ const LeagueInfoCard = ({ leagueData }) => {
             </Table>
           </Tab>
           <Tab eventKey='details' title='Details'>
-            <Table striped hover size='sm' className='mt-1 mb-0'>
+            <Table
+              striped
+              hover
+              size='sm'
+              className='mb-0'
+              id='league-details-table'>
               <tbody>
                 <tr>
                   <td>Initial Rank:</td>

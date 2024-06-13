@@ -14,20 +14,42 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import Accordion from 'react-bootstrap/Accordion'
 // State functions
 import { useSelector, useDispatch } from 'react-redux'
-import { changeInputValues, resetFormValues } from './leagueInfoModalSlice'
+import {
+  loadLeagueData,
+  changeInputValues,
+  resetFormValues,
+} from './leagueInfoModalSlice'
 import { selectInputValues } from './leagueInfoModalSlice'
+import { selectLeague } from '../../AppSlice'
 
-const LeagueInfoModal = ({ type = 'add' }) => {
+const LeagueInfoModal = ({ type = 'add', leagueName = null }) => {
   const [showModal, setShowModal] = useState(false)
+  const leagueToEdit = useSelector((state) => selectLeague(state, leagueName))
 
-  const toggleModal = () => setShowModal(!showModal)
+  const openModal = () => {
+    console.log(`Open ${type} modal`)
+
+    setShowModal(true)
+    if (type === 'edit' && leagueToEdit) {
+      dispatch(loadLeagueData(leagueToEdit))
+    } else {
+      dispatch(resetFormValues())
+    }
+  }
+  const closeModal = () => {
+    console.log(`Close ${type} modal`)
+
+    setShowModal(false)
+  }
 
   const handleFormSubmit = (event) => {
     event.preventDefault()
     console.log(event)
   }
 
-  const handleLeagueDelete = () => {}
+  const handleLeagueDelete = () => {
+    console.log(`delete: ${leagueName}`)
+  }
 
   // Form input state
   const inputValues = useSelector(selectInputValues)
@@ -44,7 +66,7 @@ const LeagueInfoModal = ({ type = 'add' }) => {
         <Button
           size='sm'
           variant='secondary'
-          onClick={toggleModal}
+          onClick={openModal}
           id='add-league-button'>
           <i className='bi bi-plus'></i>
         </Button>
@@ -53,12 +75,12 @@ const LeagueInfoModal = ({ type = 'add' }) => {
           size='sm'
           variant='outline-secondary'
           className='p-0 ps-1 pe-1'
-          onClick={toggleModal}>
+          onClick={openModal}>
           <i className='bi bi-pencil-square'></i>
         </Button>
       )}
 
-      <Modal show={showModal} onHide={toggleModal} centered>
+      <Modal show={showModal} onHide={closeModal} centered>
         <Modal.Header closeButton>
           <Modal.Title>
             {type === 'add' ? 'Add League' : 'Edit League'}
@@ -158,7 +180,7 @@ const LeagueInfoModal = ({ type = 'add' }) => {
                       name='pickPosition'
                       placeholder='Enter your position in the draft pick order'
                       onChange={handleInputValueChange}
-                      value={inputValues.placeInDraft}></Form.Control>
+                      value={inputValues.pickPosition}></Form.Control>
                   </FloatingLabel>
                 </InputGroup>
               </Col>
@@ -324,6 +346,7 @@ const LeagueInfoModal = ({ type = 'add' }) => {
 
 LeagueInfoModal.propTypes = {
   type: PropTypes.string,
+  leagueName: PropTypes.string,
 }
 
 export default LeagueInfoModal

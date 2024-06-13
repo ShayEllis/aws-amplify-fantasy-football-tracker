@@ -6,10 +6,10 @@ import Container from 'react-bootstrap/Container'
 import LeagueInfoModal from '../leagueInfoModal/leagueInfoModal'
 // State functions
 import { useSelector } from 'react-redux'
-import { selectLeagues } from '../../AppSlice'
+import { selectAllLeagues } from '../../AppSlice'
 
 const Dashboard = () => {
-  const leagues = useSelector(selectLeagues)
+  const leagues = useSelector(selectAllLeagues)
 
   return (
     <>
