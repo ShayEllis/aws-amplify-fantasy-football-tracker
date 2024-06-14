@@ -1,9 +1,9 @@
+// React
+import PropTypes from 'prop-types'
 // Styles
 import './leagueInfoCard.scss'
-// Prop Validation
-import PropTypes from 'prop-types'
 // Components
-import LeagueInfoModal from '../leagueInfoModal/leagueInfoModal'
+import LeagueInfoModalButton from '../LeagueInfoModal/leagueInfoModalButton/leagueInfoModalButton'
 // Bootstrap
 import Card from 'react-bootstrap/Card'
 import Tabs from 'react-bootstrap/Tabs'
@@ -27,7 +27,10 @@ const LeagueInfoCard = ({ leagueData }) => {
             </Card.Title>
           </Col>
           <Col xs='auto'>
-            <LeagueInfoModal type='edit' leagueName={leagueData.leagueName} />
+            <LeagueInfoModalButton
+              type='edit'
+              leagueToEdit={leagueData.leagueName}
+            />
           </Col>
         </Row>
         <Card.Text>{leagueData.teamName}</Card.Text>
@@ -82,15 +85,24 @@ const LeagueInfoCard = ({ leagueData }) => {
                 </tr>
                 <tr>
                   <td>Payout 1</td>
-                  <td>{leagueData.payout1.length > 0 && `$${parseInt(leagueData.payout1).toFixed(2)}`}</td>
+                  <td>
+                    {leagueData.payout1.length > 0 &&
+                      `$${parseInt(leagueData.payout1).toFixed(2)}`}
+                  </td>
                 </tr>
                 <tr>
                   <td>Payout 2</td>
-                  <td>{leagueData.payout2.length > 0 && `$${parseInt(leagueData.payout2).toFixed(2)}`}</td>
+                  <td>
+                    {leagueData.payout2.length > 0 &&
+                      `$${parseInt(leagueData.payout2).toFixed(2)}`}
+                  </td>
                 </tr>
                 <tr>
                   <td>Payout 3</td>
-                  <td>{leagueData.payout3.length > 0 && `$${parseInt(leagueData.payout3).toFixed(2)}`}</td>
+                  <td>
+                    {leagueData.payout3.length > 0 &&
+                      `$${parseInt(leagueData.payout3).toFixed(2)}`}
+                  </td>
                 </tr>
               </tbody>
             </Table>

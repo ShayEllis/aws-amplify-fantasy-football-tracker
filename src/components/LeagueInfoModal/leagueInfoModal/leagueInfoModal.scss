@@ -1,4 +1,4 @@
-@use '../../index.scss' as colors;
+@use '../../../index.scss' as colors;
 
 #modal-accordian-item {
   border-color: red;
@@ -20,13 +20,4 @@
 }
 #modal-accordian-btn:not(.collapsed) {
   background: colors.$danger-color;
-}
-#add-league-button {
-  position: fixed;
-  right: 1.5rem;
-  bottom: 1.5rem;
-  z-index: 1030;
-  border-radius: 50%;
-  font-size: 2rem;
-  padding: 0.25rem 0.75rem;
 }

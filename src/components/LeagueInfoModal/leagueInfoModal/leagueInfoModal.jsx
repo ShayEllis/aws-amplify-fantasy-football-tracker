@@ -1,9 +1,9 @@
 // React
-import { useState } from 'react'
+import { useEffect } from 'react'
+import PropTypes from 'prop-types'
 // Styles
 import './leagueInfoModal.scss'
 // Bootstrap
-import PropTypes from 'prop-types'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 import InputGroup from 'react-bootstrap/InputGroup'
@@ -12,39 +12,46 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import Accordion from 'react-bootstrap/Accordion'
-// State functions
+// Redux
 import { useSelector, useDispatch } from 'react-redux'
 import {
+  closeModal,
   loadLeagueData,
   changeInputValues,
   resetFormValues,
 } from './leagueInfoModalSlice'
-import { selectInputValues } from './leagueInfoModalSlice'
-import { addLeague } from '../../AppSlice'
-import { selectLeague } from '../../AppSlice'
+import {
+  selectModalType,
+  selectShowModal,
+  selectInputValues,
+} from './leagueInfoModalSlice'
+import { addLeague } from '../../../AppSlice'
+import { selectLeagueData } from '../../../AppSlice'
 
-const LeagueInfoModal = ({ type = 'add', leagueName = null }) => {
-  const [showModal, setShowModal] = useState(false)
-  const leagueToEdit = useSelector((state) => selectLeague(state, leagueName))
+const LeagueInfoModal = () => {
+  const dispatch = useDispatch()
+  const showModal = useSelector(selectShowModal)
+  const type = useSelector(selectModalType)
+  const leagueDataToEdit = useSelector(selectLeagueData)
   // Form input state
   const inputValues = useSelector(selectInputValues)
-  const dispatch = useDispatch()
 
-  const openModal = () => {
-    console.log(`Open ${type} modal`)
-
-    setShowModal(true)
-    if (type === 'edit' && leagueToEdit) {
-      dispatch(loadLeagueData(leagueToEdit))
-    } else {
+  useEffect(() => {
+    if (showModal === true) {
+      console.log('Modal Open!')
+      if (type === 'edit' && leagueDataToEdit) {
+        dispatch(loadLeagueData(leagueDataToEdit))
+      }
+    }
+    if (showModal === false) {
+      console.log('Modal Closed!')
       dispatch(resetFormValues())
     }
-  }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [showModal])
 
-  const closeModal = () => {
-    console.log(`Close ${type} modal`)
-
-    setShowModal(false)
+  const handleModalClose = () => {
+    dispatch(closeModal())
   }
 
   const handleFormSubmit = (event) => {
@@ -56,7 +63,7 @@ const LeagueInfoModal = ({ type = 'add', leagueName = null }) => {
   }
 
   const handleLeagueDelete = () => {
-    console.log(`delete: ${leagueName}`)
+    console.log(`delete: ${leagueDataToEdit.leagueName}`)
   }
 
   const handleInputValueChange = (event) => {
@@ -66,25 +73,7 @@ const LeagueInfoModal = ({ type = 'add', leagueName = null }) => {
 
   return (
     <>
-      {type === 'add' ? (
-        <Button
-          size='sm'
-          variant='secondary'
-          onClick={openModal}
-          id='add-league-button'>
-          <i className='bi bi-plus'></i>
-        </Button>
-      ) : (
-        <Button
-          size='sm'
-          variant='outline-secondary'
-          className='p-0 ps-1 pe-1'
-          onClick={openModal}>
-          <i className='bi bi-pencil-square'></i>
-        </Button>
-      )}
-
-      <Modal show={showModal} onHide={closeModal} centered>
+      <Modal show={showModal} onHide={handleModalClose} centered>
         <Modal.Header closeButton>
           <Modal.Title>
             {type === 'add' ? 'Add League' : 'Edit League'}
@@ -349,8 +338,7 @@ const LeagueInfoModal = ({ type = 'add', leagueName = null }) => {
 }
 
 LeagueInfoModal.propTypes = {
-  type: PropTypes.string,
-  leagueName: PropTypes.string,
+  leagueToEdit: PropTypes.string,
 }
 
 export default LeagueInfoModal

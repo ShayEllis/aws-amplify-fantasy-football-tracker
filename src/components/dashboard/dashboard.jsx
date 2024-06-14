@@ -3,14 +3,14 @@ import './dashboard.scss'
 // Bootstrap
 import LeagueInfoCard from '../leagueInfoCard/leagueInfoCard'
 import Container from 'react-bootstrap/Container'
-import LeagueInfoModal from '../leagueInfoModal/leagueInfoModal'
-// State functions
+import LeagueInfoModal from '../LeagueInfoModal/leagueInfoModal/leagueInfoModal'
+import LeagueInfoModalButton from '../LeagueInfoModal/leagueInfoModalButton/leagueInfoModalButton'
+// Redux
 import { useSelector } from 'react-redux'
 import { selectAllLeagues } from '../../AppSlice'
 
 const Dashboard = () => {
   const leagues = useSelector(selectAllLeagues)
-  console.log(leagues)
 
   return (
     <>
@@ -18,6 +18,7 @@ const Dashboard = () => {
         className='d-flex flex-wrap justify-content-around p-0 pt-3 pb-3 gx-3 gap-3'
         fluid>
         <LeagueInfoModal />
+        <LeagueInfoModalButton />
         {leagues.map((leagueData) => (
           <LeagueInfoCard key={leagueData.leagueName} leagueData={leagueData} />
         ))}

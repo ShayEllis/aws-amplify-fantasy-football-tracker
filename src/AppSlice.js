@@ -1,8 +1,9 @@
 // Redux
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, createSelector } from '@reduxjs/toolkit'
+import { selectLeagueToEdit } from './components/LeagueInfoModal/leagueInfoModal/leagueInfoModalSlice'
+
 // Data for testing
 import testData from './tests/testData'
-
 // ***** For testing *****
 const initialState = {
   leagues: testData.leagues,
@@ -25,20 +26,24 @@ const appSlice = createSlice({
   },
 })
 
-// State selector functions
+// State selectors
 const selectAllLeagues = (state) => state.app.leagues
-const selectLeague = (state, leagueName) => {
-  let selectedLeague = null
-  for (let league of state.app.leagues) {
-    if (league.leagueName === leagueName) {
-      selectedLeague = { ...league }
-      break
+// Memoized Selectors
+const selectLeagueData = createSelector(
+  [selectLeagueToEdit, selectAllLeagues],
+  (leagueToEdit, allLeagues) => {
+    let selectedLeague = null
+    for (let league of allLeagues) {
+      if (league.leagueName === leagueToEdit) {
+        selectedLeague = { ...league }
+        break
+      }
     }
+    return selectedLeague
   }
-  return selectedLeague
-}
+)
 
 // Exports
-export { selectAllLeagues, selectLeague }
+export { selectAllLeagues, selectLeagueData }
 export const { addLeague } = appSlice.actions
 export default appSlice.reducer
