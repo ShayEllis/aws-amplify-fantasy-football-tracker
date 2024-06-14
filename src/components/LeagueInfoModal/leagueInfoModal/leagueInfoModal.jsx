@@ -130,7 +130,7 @@ const LeagueInfoModal = () => {
                       name='platform'
                       placeholder='Enter the platform the league create on'
                       onChange={handleInputValueChange}
-                      defaultValue={inputValues.platform}
+                      value={inputValues.platform}
                       required>
                       <option disabled value=''>
                         Platforms...
