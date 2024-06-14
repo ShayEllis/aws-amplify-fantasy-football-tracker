@@ -18,10 +18,23 @@ const appSlice = createSlice({
   name: 'app',
   initialState,
   reducers: {
-    // deleteLeague: (state, action) => {},
     addLeague: (state, { payload }) => {
       const newLeagues = [...state.leagues, payload]
       return { ...state, leagues: newLeagues }
+    },
+    editLeagueInfo: (state, { payload }) => {
+      const leaguesCopy = [...state.leagues]
+      const idxToReplace = leaguesCopy.findIndex(
+        (league) => league.leagueName === payload.leagueToEdit
+      )
+      leaguesCopy[idxToReplace] = payload.newLeagueData
+      return { ...state, leagues: leaguesCopy }
+    },
+    deleteLeague: (state, { payload }) => {
+      let leaguesCopy = [...state.leagues].filter(
+        (league) => league.leagueName !== payload
+      )
+      return { ...state, leagues: leaguesCopy }
     },
   },
 })
@@ -29,6 +42,14 @@ const appSlice = createSlice({
 // State selectors
 const selectAllLeagues = (state) => state.app.leagues
 // Memoized Selectors
+const selectAllLeagueNames = createSelector(
+  [selectLeagueToEdit, selectAllLeagues],
+  (leagueToEdit, allLeagues) => {
+    return allLeagues
+      .map((league) => league.leagueName)
+      .filter((leagueName) => leagueName !== leagueToEdit)
+  }
+)
 const selectLeagueData = createSelector(
   [selectLeagueToEdit, selectAllLeagues],
   (leagueToEdit, allLeagues) => {
@@ -44,6 +65,6 @@ const selectLeagueData = createSelector(
 )
 
 // Exports
-export { selectAllLeagues, selectLeagueData }
-export const { addLeague } = appSlice.actions
+export { selectAllLeagues, selectAllLeagueNames, selectLeagueData }
+export const { addLeague, editLeagueInfo, deleteLeague } = appSlice.actions
 export default appSlice.reducer

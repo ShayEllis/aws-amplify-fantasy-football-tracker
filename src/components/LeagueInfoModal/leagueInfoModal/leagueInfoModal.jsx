@@ -25,26 +25,26 @@ import {
   selectShowModal,
   selectInputValues,
 } from './leagueInfoModalSlice'
-import { addLeague } from '../../../AppSlice'
-import { selectLeagueData } from '../../../AppSlice'
+import { addLeague, editLeagueInfo, deleteLeague } from '../../../AppSlice'
+import { selectLeagueData, selectAllLeagueNames } from '../../../AppSlice'
 
 const LeagueInfoModal = () => {
   const dispatch = useDispatch()
   const showModal = useSelector(selectShowModal)
   const type = useSelector(selectModalType)
   const leagueDataToEdit = useSelector(selectLeagueData)
+  const allLeagueNames = useSelector(selectAllLeagueNames)
+  console.log(allLeagueNames)
   // Form input state
   const inputValues = useSelector(selectInputValues)
 
   useEffect(() => {
     if (showModal === true) {
-      console.log('Modal Open!')
       if (type === 'edit' && leagueDataToEdit) {
         dispatch(loadLeagueData(leagueDataToEdit))
       }
     }
     if (showModal === false) {
-      console.log('Modal Closed!')
       dispatch(resetFormValues())
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -56,14 +56,20 @@ const LeagueInfoModal = () => {
 
   const handleFormSubmit = (event) => {
     event.preventDefault()
-    if (type === 'add') {
-      dispatch(addLeague(inputValues))
-      closeModal()
+    event.stopPropagation()
+    if (validateUniqueLeagueName() === true) {
+      if (type === 'add') {
+        dispatch(addLeague(inputValues))
+      } else {
+        dispatch(
+          editLeagueInfo({
+            leagueToEdit: leagueDataToEdit.leagueName,
+            newLeagueData: inputValues,
+          })
+        )
+      }
+      handleModalClose()
     }
-  }
-
-  const handleLeagueDelete = () => {
-    console.log(`delete: ${leagueDataToEdit.leagueName}`)
   }
 
   const handleInputValueChange = (event) => {
@@ -71,9 +77,22 @@ const LeagueInfoModal = () => {
     dispatch(changeInputValues({ name, value }))
   }
 
+  const validateUniqueLeagueName = () => {
+    return !allLeagueNames.includes(inputValues.leagueName)
+  }
+
+  const handleLeagueDelete = () => {
+    dispatch(deleteLeague(leagueDataToEdit.leagueName))
+    handleModalClose()
+  }
+
   return (
     <>
-      <Modal show={showModal} onHide={handleModalClose} centered>
+      <Modal
+        backdrop='static'
+        show={showModal}
+        onHide={handleModalClose}
+        centered>
         <Modal.Header closeButton>
           <Modal.Title>
             {type === 'add' ? 'Add League' : 'Edit League'}
@@ -91,7 +110,11 @@ const LeagueInfoModal = () => {
                   placeholder='Enter a league name'
                   onChange={handleInputValueChange}
                   value={inputValues.leagueName}
+                  isInvalid={!validateUniqueLeagueName()}
                   required></Form.Control>
+                <Form.Control.Feedback type='invalid' tooltip>
+                  League name already exsists
+                </Form.Control.Feedback>
               </FloatingLabel>
             </InputGroup>
 
