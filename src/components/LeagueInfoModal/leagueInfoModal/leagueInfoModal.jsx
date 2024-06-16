@@ -27,6 +27,9 @@ import {
 } from './leagueInfoModalSlice'
 import { addLeague, editLeagueInfo, deleteLeague } from '../../../AppSlice'
 import { selectLeagueData, selectAllLeagueNames } from '../../../AppSlice'
+// Utils
+import { filterBlankInputs } from '../../../utils/utils'
+import { amplifyData } from '../../../utils/amplifyData'
 
 const LeagueInfoModal = () => {
   const dispatch = useDispatch()
@@ -34,7 +37,6 @@ const LeagueInfoModal = () => {
   const type = useSelector(selectModalType)
   const leagueDataToEdit = useSelector(selectLeagueData)
   const allLeagueNames = useSelector(selectAllLeagueNames)
-  console.log(allLeagueNames)
   // Form input state
   const inputValues = useSelector(selectInputValues)
 
@@ -59,8 +61,10 @@ const LeagueInfoModal = () => {
     event.stopPropagation()
     if (validateUniqueLeagueName() === true) {
       if (type === 'add') {
+        amplifyData.createLeague(filterBlankInputs(inputValues)) // create spinner and await before closing modal
         dispatch(addLeague(inputValues))
       } else {
+        amplifyData.updateLeague(inputValues.leagueName, filterBlankInputs(inputValues)) // create spinner and await before closing modal
         dispatch(
           editLeagueInfo({
             leagueToEdit: leagueDataToEdit.leagueName,
@@ -82,6 +86,7 @@ const LeagueInfoModal = () => {
   }
 
   const handleLeagueDelete = () => {
+    amplifyData.deleteLeague(inputValues.leagueName) // create spinner and await before closing modal
     dispatch(deleteLeague(leagueDataToEdit.leagueName))
     handleModalClose()
   }
@@ -111,6 +116,7 @@ const LeagueInfoModal = () => {
                   onChange={handleInputValueChange}
                   value={inputValues.leagueName}
                   isInvalid={!validateUniqueLeagueName()}
+                  disabled={type === 'edit'}
                   required></Form.Control>
                 <Form.Control.Feedback type='invalid' tooltip>
                   League name already exsists

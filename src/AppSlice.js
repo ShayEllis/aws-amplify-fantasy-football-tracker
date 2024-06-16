@@ -3,21 +3,24 @@ import { createSlice, createSelector } from '@reduxjs/toolkit'
 import { selectLeagueToEdit } from './components/LeagueInfoModal/leagueInfoModal/leagueInfoModalSlice'
 
 // Data for testing
-import testData from './tests/testData'
+// import testData from './tests/testData'
 // ***** For testing *****
-const initialState = {
-  leagues: testData.leagues,
-}
+// const initialState = {
+//   leagues: testData.leagues,
+// }
 
 // Values for initial state
-// const initialState = {
-//   leagues: [],
-// }
+const initialState = {
+  leagues: [], // ***** change format to leagues: { leagueName1: [...otherData], leagueName2: [...otherData]} ??? *****
+}
 
 const appSlice = createSlice({
   name: 'app',
   initialState,
   reducers: {
+    fetchLeagues: (state, { payload }) => {
+      return { ...state, leagues: payload}
+    },
     addLeague: (state, { payload }) => {
       const newLeagues = [...state.leagues, payload]
       return { ...state, leagues: newLeagues }
@@ -66,5 +69,6 @@ const selectLeagueData = createSelector(
 
 // Exports
 export { selectAllLeagues, selectAllLeagueNames, selectLeagueData }
-export const { addLeague, editLeagueInfo, deleteLeague } = appSlice.actions
+export const { fetchLeagues, addLeague, editLeagueInfo, deleteLeague } =
+  appSlice.actions
 export default appSlice.reducer

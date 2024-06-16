@@ -20,6 +20,12 @@ import store from './reduxStore/store.js'
 import { RouterProvider } from 'react-router-dom'
 import router from './router/router.jsx'
 
+// Configure AWS Amplify Backend and Auth
+import { Amplify } from 'aws-amplify'
+import outputs from '../amplify_outputs.json'
+
+Amplify.configure(outputs)
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>

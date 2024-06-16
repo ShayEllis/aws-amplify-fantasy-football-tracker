@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.5",
+    "aws-amplify": "^6.3.6",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
     "normalize.css": "^8.0.1",
@@ -22,13 +23,21 @@
     "sass": "^1.77.4"
   },
   "devDependencies": {
+    "@aws-amplify/backend": "^1.0.3",
+    "@aws-amplify/backend-cli": "^1.0.4",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.0",
+    "aws-cdk": "^2.146.0",
+    "aws-cdk-lib": "^2.146.0",
+    "constructs": "^10.3.0",
+    "esbuild": "^0.21.5",
     "eslint": "^8.57.0",
     "eslint-plugin-react": "^7.34.2",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.7",
+    "tsx": "^4.15.5",
+    "typescript": "^5.4.5",
     "vite": "^5.2.12"
   }
 }
