@@ -86,21 +86,21 @@ const LeagueInfoCard = ({ leagueData }) => {
                 <tr>
                   <td>Payout 1</td>
                   <td>
-                    {leagueData.payout1.length > 0 &&
+                    {leagueData.payout1 &&
                       `$${parseInt(leagueData.payout1).toFixed(2)}`}
                   </td>
                 </tr>
                 <tr>
                   <td>Payout 2</td>
                   <td>
-                    {leagueData.payout2.length > 0 &&
+                    {leagueData.payout2 &&
                       `$${parseInt(leagueData.payout2).toFixed(2)}`}
                   </td>
                 </tr>
                 <tr>
                   <td>Payout 3</td>
                   <td>
-                    {leagueData.payout3.length > 0 &&
+                    {leagueData.payout3 &&
                       `$${parseInt(leagueData.payout3).toFixed(2)}`}
                   </td>
                 </tr>
