@@ -20,8 +20,10 @@ function App() {
 
   useState(() => {
     amplifyData.fetchLeagues().then((response) => {
-      const convertedResponse = replaceNullValues(response) // create spinner while data is being loaded
-      dispatch(fetchLeagues(convertedResponse))
+      if (response) {
+        const convertedResponse = replaceNullValues(response) // create spinner while data is being loaded
+        dispatch(fetchLeagues(convertedResponse))
+      }
     })
   }, [])
 

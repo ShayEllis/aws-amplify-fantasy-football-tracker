@@ -19,7 +19,8 @@ const appSlice = createSlice({
   initialState,
   reducers: {
     fetchLeagues: (state, { payload }) => {
-      return { ...state, leagues: payload}
+      console.log(payload)
+      return { ...state, leagues: payload }
     },
     addLeague: (state, { payload }) => {
       const newLeagues = [...state.leagues, payload]

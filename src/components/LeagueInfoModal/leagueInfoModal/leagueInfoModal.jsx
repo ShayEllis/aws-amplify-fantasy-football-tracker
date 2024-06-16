@@ -64,7 +64,7 @@ const LeagueInfoModal = () => {
         amplifyData.createLeague(filterBlankInputs(inputValues)) // create spinner and await before closing modal
         dispatch(addLeague(inputValues))
       } else {
-        amplifyData.updateLeague(inputValues.leagueName, filterBlankInputs(inputValues)) // create spinner and await before closing modal
+        amplifyData.updateLeague(filterBlankInputs(inputValues)) // create spinner and await before closing modal
         dispatch(
           editLeagueInfo({
             leagueToEdit: leagueDataToEdit.leagueName,
