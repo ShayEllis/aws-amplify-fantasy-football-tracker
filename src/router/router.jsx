@@ -3,6 +3,7 @@ import { createBrowserRouter } from 'react-router-dom'
 // Components
 import App from '../App'
 import Dashboard from '../components/dashboard/dashboard'
+import TeamBuilder from '../components/teamBuilder/teamBilder'
 
 const router = createBrowserRouter([
   {
@@ -15,7 +16,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'teamBuilder',
-        element: '',
+        element: <TeamBuilder />,
       },
     ],
   },

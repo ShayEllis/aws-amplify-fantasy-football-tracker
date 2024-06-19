@@ -1,5 +1,6 @@
 // React
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 // Styles
 import './navigationBar.scss'
 // React Router
@@ -11,11 +12,18 @@ import Nav from 'react-bootstrap/Nav'
 import Container from 'react-bootstrap/Container'
 // Icons
 import footballIcon from '../../assets/football-icon.svg'
+// AWS Authentication
+import amplifyAuth from '../../utils/amplifyAuth'
 
-const NavigationBar = () => {
+const NavigationBar = ({ signOut }) => {
   const [showOffcanvas, setShowOffcanvas] = useState(false)
+  const [user, setUser] = useState(null)
 
   const toggleOffcanvas = () => setShowOffcanvas(!showOffcanvas)
+
+  useEffect(() => {
+    amplifyAuth.fetchUsername().then((response) => setUser(response))
+  }, [])
 
   return (
     <Navbar
@@ -25,7 +33,7 @@ const NavigationBar = () => {
       fixed='top'
       id='navbar'>
       <Container fluid>
-        <Link to='/'>
+        <Link to='/dashboard'>
           <Navbar.Brand>
             <img
               src={footballIcon}
@@ -48,28 +56,40 @@ const NavigationBar = () => {
           show={showOffcanvas}
           onHide={toggleOffcanvas}>
           <Offcanvas.Header closeButton>
-            <Offcanvas.Title id='offcanvas-nav-title'>Menu</Offcanvas.Title>
+            <Offcanvas.Title id='offcanvas-nav-title'>{user}</Offcanvas.Title>
           </Offcanvas.Header>
+
           <Offcanvas.Body>
             <Nav>
               <NavLink
                 to='dashboard'
-                className='nav-link'
+                className={({ isActive }) =>
+                  isActive ? 'nav-link active-nav-link' : 'nav-link'
+                }
                 onClick={toggleOffcanvas}>
                 Dashboard
               </NavLink>
               <NavLink
                 to='teamBuilder'
-                className='nav-link'
+                className={({ isActive }) =>
+                  isActive ? 'nav-link active-nav-link' : 'nav-link'
+                }
                 onClick={toggleOffcanvas}>
                 Team Details
               </NavLink>
             </Nav>
           </Offcanvas.Body>
+          <Nav.Link className='p-2 ps-4' id='logout-button' onClick={signOut}>
+            Log Out
+          </Nav.Link>
         </Navbar.Offcanvas>
       </Container>
     </Navbar>
   )
+}
+
+NavigationBar.propTypes = {
+  signOut: PropTypes.func,
 }
 
 export default NavigationBar

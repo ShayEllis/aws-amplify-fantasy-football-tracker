@@ -1,6 +1,6 @@
 // Redux
 import { createSlice, createSelector } from '@reduxjs/toolkit'
-import { selectLeagueToEdit } from './components/LeagueInfoModal/leagueInfoModal/leagueInfoModalSlice'
+import { selectLeagueToEdit } from './components/leagueInfoModal/leagueInfoModal/leagueInfoModalSlice'
 
 // Data for testing
 // import testData from './tests/testData'
@@ -11,7 +11,7 @@ import { selectLeagueToEdit } from './components/LeagueInfoModal/leagueInfoModal
 
 // Values for initial state
 const initialState = {
-  leagues: [], // ***** change format to leagues: { leagueName1: [...otherData], leagueName2: [...otherData]} ??? *****
+  leagues: [],
 }
 
 const appSlice = createSlice({
@@ -19,7 +19,6 @@ const appSlice = createSlice({
   initialState,
   reducers: {
     fetchLeagues: (state, { payload }) => {
-      console.log(payload)
       return { ...state, leagues: payload }
     },
     addLeague: (state, { payload }) => {

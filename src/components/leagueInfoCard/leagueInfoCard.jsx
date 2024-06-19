@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 // Styles
 import './leagueInfoCard.scss'
 // Components
-import LeagueInfoModalButton from '../LeagueInfoModal/leagueInfoModalButton/leagueInfoModalButton'
+import LeagueInfoModalButton from '../leagueInfoModal/leagueInfoModalButton/leagueInfoModalButton'
 // Bootstrap
 import Card from 'react-bootstrap/Card'
 import Tabs from 'react-bootstrap/Tabs'

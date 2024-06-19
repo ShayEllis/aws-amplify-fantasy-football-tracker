@@ -16,17 +16,13 @@ const filterBlankInputs = (formData) => {
 }
 
 const replaceNullValues = (leagueData) => {
-  console.log(leagueData)
- return leagueData.map((league) => {
-  const leagueCopy = {...league}
-  for (let key in leagueCopy) {
-    if (leagueCopy[key] === null) leagueCopy[key] = ''
-  }
-  return leagueCopy
- })
+  return leagueData.map((league) => {
+    const leagueCopy = { ...league }
+    for (let key in leagueCopy) {
+      if (leagueCopy[key] === null) leagueCopy[key] = ''
+    }
+    return leagueCopy
+  })
 }
 
 export { formatDate, filterBlankInputs, replaceNullValues }
-
-
-//arn:aws:iam::395333095307:role/cdk-hnb659fds-deploy-role-395333095307-us-west-2

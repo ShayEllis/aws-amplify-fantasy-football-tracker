@@ -3,8 +3,8 @@ import './dashboard.scss'
 // Bootstrap
 import LeagueInfoCard from '../leagueInfoCard/leagueInfoCard'
 import Container from 'react-bootstrap/Container'
-import LeagueInfoModal from '../LeagueInfoModal/leagueInfoModal/leagueInfoModal'
-import LeagueInfoModalButton from '../LeagueInfoModal/leagueInfoModalButton/leagueInfoModalButton'
+import LeagueInfoModal from '../leagueInfoModal/leagueInfoModal/leagueInfoModal'
+import LeagueInfoModalButton from '../leagueInfoModal/leagueInfoModalButton/leagueInfoModalButton'
 // Redux
 import { useSelector } from 'react-redux'
 import { selectAllLeagues } from '../../AppSlice'

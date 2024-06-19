@@ -4,3 +4,10 @@
 .navbar-img {
   transform: rotate(45deg);
 }
+.active-nav-link {
+  text-decoration: underline;
+  pointer-events: none;
+}
+#logout-button {
+  text-decoration: underline;
+}
