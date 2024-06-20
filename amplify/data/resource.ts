@@ -18,7 +18,7 @@ const schema = a.schema({
       payout3: a.float(),
     })
     .identifier(['leagueName'])
-    .authorization((allow) => [allow.owner()]),
+    .authorization((allow) => [allow.guest()]),
 })
 
 export type Schema = ClientSchema<typeof schema>
