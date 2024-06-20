@@ -6,41 +6,42 @@ import { fetchLeagues } from './AppSlice'
 // Styles
 import './App.scss'
 // React Router
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 // Components
 import NavigationBar from './components/navigationBar/navigationBar'
 // Bootstrap
 import Container from 'react-bootstrap/Container'
 // Utils
 import { amplifyData } from './utils/amplifyData'
+import { amplifyAuth } from './utils/amplifyAuth'
 import { replaceNullValues } from './utils/utils'
-// AWS Authentication
-import { Authenticator } from '@aws-amplify/ui-react'
-import '@aws-amplify/ui-react/styles.css'
 
 function App() {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   useState(() => {
-    amplifyData.fetchLeagues().then((response) => { // move this to after authentication - maybe dashboard
+    amplifyAuth.userIsValid().then((response) => {
       if (response) {
-        const convertedResponse = replaceNullValues(response) // create spinner while data is being loaded
-        dispatch(fetchLeagues(convertedResponse))
+        amplifyData.fetchLeagues().then((response) => {
+          if (response) {
+            const convertedResponse = replaceNullValues(response) // create spinner while data is being loaded
+            dispatch(fetchLeagues(convertedResponse))
+          }
+        })
+      } else {
+        navigate('/signin')
       }
     })
   }, [])
 
   return (
-    <Authenticator>
-      {({ signOut }) => (
-        <>
-          <NavigationBar signOut={signOut} />
-          <Container fluid>
-            <Outlet />
-          </Container>
-        </>
-      )}
-    </Authenticator>
+    <>
+      <NavigationBar />
+      <Container fluid>
+        <Outlet />
+      </Container>
+    </>
   )
 }
 

@@ -1,6 +1,5 @@
 // React
 import { useState, useEffect } from 'react'
-import PropTypes from 'prop-types'
 // Styles
 import './navigationBar.scss'
 // React Router
@@ -13,17 +12,26 @@ import Container from 'react-bootstrap/Container'
 // Icons
 import footballIcon from '../../assets/football-icon.svg'
 // AWS Authentication
-import amplifyAuth from '../../utils/amplifyAuth'
+import { amplifyAuth } from '../../utils/amplifyAuth'
+import { signOut } from 'aws-amplify/auth'
+// React Router
+import { useNavigate } from 'react-router-dom'
 
-const NavigationBar = ({ signOut }) => {
+const NavigationBar = () => {
   const [showOffcanvas, setShowOffcanvas] = useState(false)
   const [user, setUser] = useState(null)
+  const navigate = useNavigate()
 
   const toggleOffcanvas = () => setShowOffcanvas(!showOffcanvas)
 
   useEffect(() => {
     amplifyAuth.fetchUsername().then((response) => setUser(response))
   }, [])
+
+  const handleSignOut = () => {
+    signOut()
+    navigate('/')
+  }
 
   return (
     <Navbar
@@ -79,17 +87,13 @@ const NavigationBar = ({ signOut }) => {
               </NavLink>
             </Nav>
           </Offcanvas.Body>
-          <Nav.Link className='p-2 ps-4' id='logout-button' onClick={signOut}>
+          <Nav.Link className='p-2 ps-4' id='logout-button' onClick={handleSignOut}>
             Log Out
           </Nav.Link>
         </Navbar.Offcanvas>
       </Container>
     </Navbar>
   )
-}
-
-NavigationBar.propTypes = {
-  signOut: PropTypes.func,
 }
 
 export default NavigationBar

@@ -13,17 +13,15 @@ const Dashboard = () => {
   const leagues = useSelector(selectAllLeagues)
 
   return (
-    <>
-      <Container
-        className='d-flex flex-wrap justify-content-around p-0 pt-3 pb-3 gx-3 gap-3'
-        fluid>
-        <LeagueInfoModal />
-        <LeagueInfoModalButton />
-        {leagues.map((leagueData) => (
-          <LeagueInfoCard key={leagueData.leagueName} leagueData={leagueData} />
-        ))}
-      </Container>
-    </>
+    <Container
+      className='d-flex flex-wrap justify-content-around p-0 pt-3 pb-3 gx-3 gap-3'
+      fluid>
+      <LeagueInfoModal />
+      <LeagueInfoModalButton />
+      {leagues.map((leagueData) => (
+        <LeagueInfoCard key={leagueData.leagueName} leagueData={leagueData} />
+      ))}
+    </Container>
   )
 }
 
