@@ -1,4 +1,4 @@
-// Reformat date string from form input
+// Re-format date string from form input
 const formatDate = (dateString) => {
   if (!dateString) return undefined
   const month = dateString.substring(5, 7)
@@ -6,7 +6,7 @@ const formatDate = (dateString) => {
   const year = dateString.substring(0, 4)
   return `${month}/${day}/${year}`
 }
-
+// Remove blank inputs before data is sent to backend
 const filterBlankInputs = (formData) => {
   const formDataCopy = { ...formData }
   for (let inputVal in formDataCopy) {
@@ -14,7 +14,7 @@ const filterBlankInputs = (formData) => {
   }
   return formDataCopy
 }
-
+// Replace null with '' when data is received from the backend
 const replaceNullValues = (leagueData) => {
   return leagueData.map((league) => {
     const leagueCopy = { ...league }

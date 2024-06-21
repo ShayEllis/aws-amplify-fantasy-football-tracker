@@ -12,7 +12,7 @@ import Table from 'react-bootstrap/Table'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 // Utils
-import { formatDate } from '../../utils/utils'
+import { formatDate } from '../../../utils/utils'
 
 const LeagueInfoCard = ({ leagueData }) => {
   const formatedDraftDate = formatDate(leagueData.draftDate)

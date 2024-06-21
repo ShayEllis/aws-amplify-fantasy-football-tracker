@@ -6,7 +6,7 @@ import Container from 'react-bootstrap/Container'
 const TeamBuilder = () => {
   return (
     <Container>
-      <p>test</p>
+      <p>Team builder test</p>
     </Container>
   )
 }

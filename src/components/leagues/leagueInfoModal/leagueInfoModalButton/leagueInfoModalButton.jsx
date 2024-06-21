@@ -10,7 +10,7 @@ import {
   changeModalType,
   openModal,
   setLeagueToEdit,
-} from '../leagueInfoModal/leagueInfoModalSlice'
+} from '../leagueInfoModalSlice'
 
 const LeagueInfoModalButton = ({ type = 'add', leagueToEdit = null }) => {
   const dispatch = useDispatch()

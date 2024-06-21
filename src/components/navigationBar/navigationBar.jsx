@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 // Styles
 import './navigationBar.scss'
 // React Router
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useOutletContext } from 'react-router-dom'
 // Bootstrap
 import Navbar from 'react-bootstrap/Navbar'
 import Offcanvas from 'react-bootstrap/Offcanvas'
@@ -13,7 +13,6 @@ import Container from 'react-bootstrap/Container'
 import footballIcon from '../../assets/football-icon.svg'
 // AWS Authentication
 import { amplifyAuth } from '../../utils/amplifyAuth'
-import { signOut } from 'aws-amplify/auth'
 // React Router
 import { useNavigate } from 'react-router-dom'
 
@@ -21,6 +20,7 @@ const NavigationBar = () => {
   const [showOffcanvas, setShowOffcanvas] = useState(false)
   const [user, setUser] = useState(null)
   const navigate = useNavigate()
+  const signOut = useOutletContext()
 
   const toggleOffcanvas = () => setShowOffcanvas(!showOffcanvas)
 
@@ -76,6 +76,14 @@ const NavigationBar = () => {
                 }
                 onClick={toggleOffcanvas}>
                 Dashboard
+              </NavLink>
+              <NavLink
+                to='leagues'
+                className={({ isActive }) =>
+                  isActive ? 'nav-link active-nav-link' : 'nav-link'
+                }
+                onClick={toggleOffcanvas}>
+                Leagues
               </NavLink>
               <NavLink
                 to='teamBuilder'

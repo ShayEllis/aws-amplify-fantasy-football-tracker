@@ -1,6 +1,6 @@
 // Redux
 import { createSlice, createSelector } from '@reduxjs/toolkit'
-import { selectLeagueToEdit } from './components/leagueInfoModal/leagueInfoModal/leagueInfoModalSlice'
+import { selectLeagueToEdit } from './components/leagues/leagueInfoModal/leagueInfoModalSlice'
 
 // Data for testing
 // import testData from './tests/testData'
