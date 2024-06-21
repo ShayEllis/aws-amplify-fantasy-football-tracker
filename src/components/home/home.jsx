@@ -12,7 +12,7 @@ const Home = () => {
   const navigate = useNavigate()
 
   const handleSignIn = () => {
-    navigate('/app/dashboard')
+    navigate('/main/dashboard')
   }
   return (
     <Container>

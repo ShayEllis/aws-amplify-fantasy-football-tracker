@@ -41,7 +41,7 @@ const NavigationBar = () => {
       fixed='top'
       id='navbar'>
       <Container fluid>
-        <Link to='/dashboard'>
+        <Link to='/main/dashboard'>
           <Navbar.Brand>
             <img
               src={footballIcon}
@@ -86,7 +86,7 @@ const NavigationBar = () => {
                 Leagues
               </NavLink>
               <NavLink
-                to='teamBuilder'
+                to='teamDetails'
                 className={({ isActive }) =>
                   isActive ? 'nav-link active-nav-link' : 'nav-link'
                 }

@@ -19,9 +19,10 @@ const router = createBrowserRouter([
     element: <SignIn />,
     children: [
       {
-        path: '/app',
+        path: '/main',
         element: <App />,
         children: [
+          // {index: true, element: <Dashboard />} /** Use this instead of 'dashboard' path? */
           {
             path: 'dashboard',
             element: <Dashboard />,
@@ -31,9 +32,17 @@ const router = createBrowserRouter([
             element: <Leagues />,
           },
           {
-            path: 'teamBuilder',
+            path: 'teamDetails',
             element: <TeamBuilder />,
           },
+          // {
+          //   path: 'leagueStats/:leagueName'
+          //   element: <></>
+          // },
+          // {
+          //   path: 'leagueStats/:leagueName/edit'  /** use something like this for league stats? */
+          //   element: <></>
+          // },
         ],
       },
     ],

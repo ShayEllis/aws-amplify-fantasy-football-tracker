@@ -14,7 +14,7 @@ const Leagues = () => {
 
   return (
     <Container
-      className='d-flex flex-wrap justify-content-around p-0 pt-3 pb-3 gx-3 gap-3'
+      className='d-flex flex-wrap justify-content-evenly p-0 pt-3 pb-3 gx-3 gap-3'
       fluid>
       <LeagueInfoModal />
       <LeagueInfoModalButton />
