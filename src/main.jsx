@@ -14,7 +14,7 @@ import { Provider } from 'react-redux'
 import store from './reduxStore/store.js'
 // Configure React-Router-Dom
 import { RouterProvider } from 'react-router-dom'
-import router from './router/router.jsx'
+import router from './router/router'
 // Configure AWS Amplify Backend and Auth
 import { Amplify } from 'aws-amplify'
 import outputs from '../amplify_outputs.json'

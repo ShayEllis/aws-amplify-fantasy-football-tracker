@@ -1,0 +1,13 @@
+.boxContainer {
+  background-color: lightgray;
+}
+.childBoxes {
+  height: 50px;
+}
+.childBoxes:nth-child(even) {
+  background-color: green;
+}
+.childBoxes:nth-child(odd) {
+  background-color: red;
+}
+

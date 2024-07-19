@@ -6,12 +6,10 @@ import { Outlet } from 'react-router-dom'
 
 const SignIn = () => {
   return (
-  <Authenticator>
-    {({signOut}) => (
-      <Outlet context={signOut}/>
-    )}
-  </Authenticator>
-)
+    <Authenticator>
+      {({ signOut }) => <Outlet context={signOut} />}
+    </Authenticator>
+  )
 }
 
 export default SignIn
